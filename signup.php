@@ -84,10 +84,11 @@ require_once("lib/connection.php");
 						<select style="width: 100%;border-radius: 3px;font-size: 20px;">
 							<option value="0">--Tỉnh/Thành phố--</option>
 							<?php
-							
-							for ($i=0; $i <5 ; $i++) { 
-							 	echo "<option>".$i.$i."</option>";
-							 } 
+							$sqll="SELECT provinceid,name FROM `tb_tinh`";
+							$query=mysqli_query($conn, $sqll);
+							while ($data= mysqli_fetch_array($query)) {
+								echo '<option value="'.$data["provinceid"].'">'.$data["name"].'</option>';
+							}
 							 ?>
 						</select>
 					</td>

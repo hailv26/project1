@@ -1,3 +1,47 @@
+<?php 
+require_once("lib/connection.php");
+?>
+<?php
+		if (isset($_POST["btn_submit1"])) {
+  			//lấy thông tin từ các form bằng phương thức POST
+  			$username = $_POST["username"];
+  			$password = $_POST["password"];
+ 			$hoten = $_POST["hoten"];
+  			$coquan = $_POST["coquan"];
+  			
+  			//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
+			  if ($username == "" || $password == "" || $hoten == "" || $coquan == "") {
+				   echo "bạn vui lòng nhập đầy đủ thông tin";}
+					else if($xacnhan != "12345678"){echo "Mã xác nhận không đúng";}
+				   else{
+  					// Kiểm tra tài khoản đã tồn tại chưa
+  					$sql="select * from tb_nhanvienhanhchinh where username='$username'";
+					$kt=mysqli_query($conn, $sql);
+ 
+					if(mysqli_num_rows($kt)  > 0){
+						echo "Tài khoản đã tồn tại";
+					}else{
+						//thực hiện việc lưu trữ dữ liệu vào db
+	    				$sql = "INSERT INTO tb_nhanvienhanhchinh(
+	    					coquan,
+	    					hoten,
+	    					username,
+						    password
+	    					) VALUES (
+	    					'$coquan',
+	    					'$hoten',
+						    '$username',
+	    					'$password'
+	    					)";
+					    // thực thi câu $sql với biến conn lấy từ file connection.php
+   						mysqli_query($conn,$sql);
+				   		echo "chúc mừng bạn đã đăng ký thành công";
+					}
+									    
+					
+			  }
+	}
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +83,8 @@
 			<div class="col-4"><label class="form-control" style="border: 0;">Quốc tịch:</label></div>
 			<div class="col-8">
 				<select class="form-control">
-					<option>--Chọn quốc tịch</option>
-					<option>Việt Nam</option>
+					<option>--Chọn quốc tịch--</option>
+					<option>Việt nam</option>
 				</select>
 			</div>
 			<div class="col-4"><label class="form-control" style="border: 0;">Số CMTND:</label></div>
@@ -49,7 +93,13 @@
 			<div class="col-8">
 				<select class="form-control">
 					<option>--Chọn Tỉnh/Thành phố--</option>
-					<option>Việt Nam</option>
+					<?php
+							$sqll="SELECT provinceid,name FROM `tb_tinh`";
+							$query=mysqli_query($conn, $sqll);
+							while ($data= mysqli_fetch_array($query)) {
+								echo '<option value="'.$data["provinceid"].'">'.$data["name"].'</option>';
+							}
+							 ?>
 				</select>
 			</div>
 			<div class="col-4"><label class="form-control" style="border: 0;">Quận/Huyện:</label></div>
