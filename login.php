@@ -48,6 +48,7 @@ require_once("lib/connection.php");
 	<title>Login</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<script src="jquery.js"></script>
 </head>
 <body>
 	<div class="header" style="height: 100px;background-color: orange;">
@@ -79,7 +80,65 @@ require_once("lib/connection.php");
 				</select>
 			</div>
 			<div class="col-4"><label class="form-control" style="border: 0;">Dân tộc:</label></div>
-			<div class="col-8"><input class="border form-control" type="text" name=""></div>
+			<div class="col-8">
+				<select class="form-control">
+					<option>--Chọn dân tộc--</option>
+					<option>	Kinh	</option>
+					<option>	Tày			</option>
+					<option>	Thái </option>
+					<option>	Mường 	</option>
+					<option>	Khmer	</option>
+					<option>	Hoa 	</option>
+					<option>	Nùng  	</option>
+					<option>	Mông	</option>
+					<option>	Dao</option>
+					<option>	Gia Rai	</option>
+					<option>	Ê  Đê</option>
+					<option>	Ba Na	</option>
+					<option>	Sán Chay 	</option>
+					<option>	Chăm 	</option>
+					<option>	Cơ Ho	</option>
+					<option>	Xơ Đăng	</option>
+					<option>	Sán Dìu	</option>
+					<option>	Hrê	</option>
+					<option>	RaGlay	</option>
+					<option>	Mnông	</option>
+					<option>	Thổ (4)	</option>
+					<option>	Xtiêng	</option>
+					<option>	Khơ mú	</option>
+					<option>	Bru Vân Kiều	</option>
+					<option>	Cơ Tu	</option>
+					<option>	Giáy	</option>
+					<option>	Tà Ôi	</option>
+					<option>	Mạ	</option>
+					<option>	Giẻ-Triêng	</option>
+					<option>	Co	</option>
+					<option>	Chơ Ro	</option>
+					<option>	Xinh Mun	</option>
+					<option>	Hà Nhì	</option>
+					<option>	Chu Ru	</option>
+					<option>	Lào	</option>
+					<option>	La Chí	</option>
+					<option>	Kháng	</option>
+					<option>	Phù Lá	</option>
+					<option>	La Hủ	</option>
+					<option>	La Ha	</option>
+					<option>	Pà Thẻn	</option>
+					<option>	Lự	</option>
+					<option>	Ngái	</option>
+					<option>	Chứt	</option>
+					<option>	Lô Lô	</option>
+					<option>	Mảng	</option>
+					<option>	Cơ Lao	</option>
+					<option>	Bố Y	</option>
+					<option>	Cống	</option>
+					<option>	Si La	</option>
+					<option>	Pu Péo	</option>
+					<option>	Rơ Măm	</option>
+					<option>	Brâu	</option>
+					<option>	Ơ Đu	</option>
+				</select>
+			</div>
 			<div class="col-4"><label class="form-control" style="border: 0;">Quốc tịch:</label></div>
 			<div class="col-8">
 				<select class="form-control">
@@ -106,8 +165,17 @@ require_once("lib/connection.php");
 			<div class="col-8">
 				<select class="form-control">
 					<option>--Chọn Quận/Huyện--</option>
-					<option>Việt Nam</option>
+					
 				</select>
+				<script type="text/javascript">
+						jQuery(document).ready(function($){
+							$("#provinceid").change(function(event){
+								$provin=$("#provinceid").val();
+								$.post('/path/to/file'),{""},function(data, textStatus,xhr)
+							})
+							)
+						}
+					</script>
 			</div>
 			<div class="col-4"><label class="form-control" style="border: 0;">Phường/Xã:</label></div>
 			<div class="col-8">
@@ -158,3 +226,4 @@ require_once("lib/connection.php");
         // if(hoten=="" || coquan=="" || username=="" || password=="") {Alert("Vui lòng nhập đầy đỉ thông tin")}
     
 	</script>
+
